@@ -18,6 +18,7 @@ class TargetTest < ActiveSupport::TestCase
 
     # when
     target.valid?
+
     # then
     assert_equal ["can't be blank"], target.errors.messages[:timeout]
   end

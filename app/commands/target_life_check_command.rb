@@ -11,18 +11,18 @@ class TargetLifeCheckCommand
   end
 
   def build_response_wrapper(response)
-    resolved = response.options[:return_code] != :couldnt_resolve_host
-    connected = resolved && (response.options[:return_code] != :couldnt_connect)
+    resolved = response.return_code != :couldnt_resolve_host
+    connected = resolved && (response.return_code != :couldnt_connect)
     {
         target_id: @target.id,
         resolved: resolved,
-        resolved_at: response.options[:namelookup_time],
+        resolved_at: response.namelookup_time,
         connected: connected,
-        connected_at: response.options[:connect_time],
-        total_time: response.options[:total_time],
-        status: response.options[:response_code],
-        size: response.options[:response_body].length,
-        error_details: response.options[:return_message]
+        connected_at: response.connect_time,
+        total_time: response.total_time,
+        status: response.response_code,
+        size: response.response_body.length,
+        error_details: response.return_message
     }
   end
 end
