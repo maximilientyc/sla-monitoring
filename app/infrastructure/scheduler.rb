@@ -1,10 +1,7 @@
 class Scheduler
-  def run_once
+  def self.run_once
     Target.find_each do |target|
-      # for now we create and execute a new command.
-      # Next we will create an asynchronous task to be launched later
-      targetLifeCheckCommand = TargetLifeCheckCommand.new target
-      targetLifeCheckCommand.execute
+      StartTargetWorker.perform_async target.id
     end
   end
 end

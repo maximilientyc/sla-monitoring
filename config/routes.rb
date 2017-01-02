@@ -56,4 +56,10 @@ Rails.application.routes.draw do
   root 'application#index'
 
   get '/targets', to: 'targets#get'
+  get '/targets/:id/diagnostics', to: 'targets#getDiagnostics'
+  post '/targets', to: 'targets#create'
+
+  # Sidekiq
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end
